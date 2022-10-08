@@ -219,7 +219,7 @@
  */
 #if configUSE_EDF_SCHEDULER == 0
   #define prvAddTaskToReadyList( pxTCB )\
-        vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB)->xGenericListItem ) )\
+        vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB)->xStateListItem ) )\
 		tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )\
   
 #else
@@ -567,7 +567,7 @@ pxNewTCB->xTaskPeriod = period;
  
 
 /*E.C. : insert the period value in the generic list iteam before to add the task in RL: */
-listSET_LIST_ITEM_VALUE( &( ( pxNewTCB )->xGenericListItem ), ( pxNewTCB)->xTaskPeriod + currentTick);
+listSET_LIST_ITEM_VALUE( &( ( pxNewTCB )->xStateListItem), ( pxNewTCB)->xTaskPeriod + currentTick);
 
  prvAddTaskToReadyList( pxNewTCB );
 
